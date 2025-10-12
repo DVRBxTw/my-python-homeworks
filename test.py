@@ -46,25 +46,25 @@ total_point = card_point + bonus_point
 
 
 if('A' in card):
-    for i,j in zip(pattern,card):
-        if(j == 'A'):
-            stoper.add(i)
+    for j,i in zip(pattern,card):
+        if i == 'A':
+            stoper.add(j)
 if('K' in card):
-    temp = ''
-    for i,j in zip(pattern,card):
-        if(j == 'K'):
-            temp += i
-            if len(temp) > 1:
+    for j,i in zip(pattern,card):
+        if i == 'K':
+            temp = j
+            temp_len = pattern.count(temp)
+            if temp_len > 1:
                 stoper.add(temp)
-
 if('Q' in card):
-    temp = ''
-    for i,j in zip(pattern,card):
-        if(j == 'Q'):
-            temp += i
-            if len(temp) > 2:
+    for j,i in zip(pattern,card):
+        if i == 'Q':
+            temp = j
+            temp_len = pattern.count(temp)
+            if temp_len > 2:
                 stoper.add(temp)
-stop = list(stoper)
+stop = sorted(stoper, key=lambda x: 'SHDC'.index(x))
+
 
 
 if(total_point < 8):
@@ -74,4 +74,4 @@ elif(total_point >= 15):
 elif(total_point >= 8 and total_point <= 14):
     suggest = f"Open {action}"
 
-print(f"HCP: {card_point}\nTotal Points: {total_point}\nDistribution (S-H-D-C):{S_count}-{H_count}-{D_count}-{C_count}\nStopped Suits: {stop}\nOpening Bid: {suggest}")
+print(f"HCP: {card_point}\nTotal Points: {total_point}\nDistribution (S-H-D-C): {S_count}-{H_count}-{D_count}-{C_count}\nStopped Suits: {stop}\nOpening Bid: {suggest}")
